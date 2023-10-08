@@ -1,8 +1,26 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from enum import Enum
+import pypyodbc as odbc
+import pandas as pd
+import mysql.connector
+
+db = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    passwd="root",
+    database="DelightfulDeli"
+)
+
+mycursor = db.cursor()
+
+mycursor.execute("SELECT * FROM DelightfulDeli_Data")
+
+for row in  mycursor:
+    print(row)
 
 
+#Initializing API
 app = FastAPI()
 
 # Categories used to describe items, used Enum package to keep constants organized and provide data validation.
@@ -19,12 +37,21 @@ class Item(BaseModel):
     category: Category
 
 
-# Store items and their details, this should be a SQL database
-items = {
-    0: Item(name="Grinder", price=9.99, count=20, id=0, category=Category.SANDWICHES),
-    1: Item(name="Sausage Egg and Cheese", price=5.99, count=40, id=1, category=Category.SANDWICHES),
-    2: Item(name="Iced Coffee", price=4.99, count=30, id=2, category=Category.BEVERAGES)
-}
+#Converting pandas data frame to dictionary with pydantic objects
+items = {}
+
+def df_to_dict(row):
+    item = {
+        "name": row["name"],
+        "price": row["price"],
+        "count": row["count"],
+        "id": row["id"],
+        "category": row["category"]
+    }
+    items[int(row["id"])] = Item(**item)
+
+
+data.apply(df_to_dict, axis=1)
 
 # API Routing, get all items
 @app.get("/")

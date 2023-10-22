@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import api from './api'
 
+//Main React app, currently just the Transaction Page, but I'm going to split it into a transactions page and an items page
 const App = () => {
   const [transactions, setTransactions] = useState([]);
   const [items, setItems] = useState([]);
@@ -10,6 +11,7 @@ const App = () => {
     item_id: ''
   });
 
+  //Gets all transactions
   const fetchTransactions = async () => {
     const response = await api.get('/transactions/');
     setTransactions(response.data)

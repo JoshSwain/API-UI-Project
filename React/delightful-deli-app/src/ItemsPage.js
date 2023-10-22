@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import api from './api'
 
+//Not currently used, working on splitting App.js
 const ItemsPage = () => {
   const [transactions, setTransactions] = useState([]);
   const [items, setItems] = useState([]);

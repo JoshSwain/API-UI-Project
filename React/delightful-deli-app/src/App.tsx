@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react'
-import api from './api'
+import api from './api.tsx'
 
 //Main React app, currently just the Transaction Page, but I'm going to split it into a transactions page and an items page
 const App = () => {
   const [transactions, setTransactions] = useState([]);
   const [items, setItems] = useState([]);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState( {
     count: '',
-    direction: 'sale',
+    direction: 'Sale',
     item_id: ''
   });
 
@@ -43,18 +43,13 @@ const App = () => {
     event.preventDefault();
     await api.post('/transactions/', formData);
     fetchTransactions();
-    setFormData({
-      count: '',
-      direction: 'sale',
-      item_id: ''
-    })
   }
 
   return (
     <div>
         <nav className='navbar navbar-dark bg-primary'>
           <div className='container-fluid'>
-            <a className='navbar-brand' href='#'>
+            <a href="#" className='navbar-brand'>
               Delightful Deli Inventory Tool
             </a>
           </div>
@@ -77,8 +72,8 @@ const App = () => {
                 Direction
               </label>
               <select className='form-select' id='direction' name='direction' onChange={handleInputChange} value={formData.direction}>
-                <option value='sale'>Sell</option>
-                <option value='restock'>Restock</option>
+                <option value='Sale'>Sell</option>
+                <option value='Restock'>Restock</option>
               </select>
             </div>
 

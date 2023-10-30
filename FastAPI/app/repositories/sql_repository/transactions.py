@@ -1,10 +1,9 @@
-from fastapi import Depends, HTTPException
-from sqlalchemy.orm import Session
-from repositories.repository_interface.transactions import TransactionRepo
 from typing import List
+from datetime import datetime
+from repositories.repository_interface.transactions import TransactionRepo
 from database import db_dependency
 from models import transactions
-from datetime import datetime
+from fastapi import HTTPException
 
 class TransactionSQLRepository(TransactionRepo):
     def __init__(self, db: db_dependency):

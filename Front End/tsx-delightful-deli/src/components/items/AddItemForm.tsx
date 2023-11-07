@@ -2,7 +2,10 @@ import React, {useState} from 'react'
 import { CustomChangeEvent, CustomFormEvent } from '../types/events';
 import api from '../../api';
 import { ItemType } from '../types/item';
-const AddItemForm: React.FC<{ additems: ItemType[]}> = ({ additems }) => {
+import useItemState from './itemState';
+import ItemsPage from '../../pages/Items';
+
+const AddItemForm: React.FC<{ items: ItemType[]}> = ({ items }) => {
 
     const [formData, setFormData] = useState({
         name: "Input Item Name",
@@ -17,7 +20,7 @@ const AddItemForm: React.FC<{ additems: ItemType[]}> = ({ additems }) => {
         });
     }
     
-    const itemWithSameName = additems.find((item) => item.name === formData.name);
+    const itemWithSameName = items.find((item) => item.name === formData.name);
 
     const handleFormSubmit = async (event: CustomFormEvent) => {
         event.preventDefault();
@@ -36,8 +39,10 @@ const AddItemForm: React.FC<{ additems: ItemType[]}> = ({ additems }) => {
             return;
         }
 
-        const response = await api.post('/items/', formData);
-        console.log("Post Response: ", response.status)
+        const post_response = await api.post('/items/', formData);
+        console.log("Post Response: ", post_response.status);
+        window.location.reload();
+
     }
 
     return (

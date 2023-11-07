@@ -3,14 +3,13 @@ import { TransactionType } from '../types/transactions';
 import { CustomChangeEvent, CustomFormEvent } from '../types/events';
 import api from '../../api';
 import { ItemType } from '../types/item';
+import { transactionLogic } from './TransactionLogic';
 
-
-// const TransactionForm: React.FC<{ transactions: TransactionType[]}> = ({transactions}) => {
 const TransactionForm: React.FC<{ items: ItemType[]}> = ({ items }) => {
     const [ formData, setFormData] = useState( {
         count: 0,
         direction: 'Sale',
-        item_id: ''
+        item_id: '0',
     });
 
     const handleInputChange = (event: CustomChangeEvent) => {
@@ -30,8 +29,17 @@ const TransactionForm: React.FC<{ items: ItemType[]}> = ({ items }) => {
             alert("Please enter a valid count")
             return
         }
+
+        const validationError = transactionLogic(formData, items.find((item) => (item.id === parseInt(formData.item_id, 10))));
+
+        if (validationError) {
+          alert(validationError);
+          return;
+        }
+
         const response = await api.post('/transactions/', formData);
-        console.log("Post Response: ", response.status)
+        console.log("Post Response: ", response.status);
+        window.location.reload();
     }
 
     return (

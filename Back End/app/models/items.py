@@ -1,6 +1,9 @@
-from sqlalchemy import Boolean, Column, Integer, String, Float, Double, DateTime
+from sqlalchemy import Boolean, Column, Integer, String, Float, Double, DATETIME
+from sqlalchemy.orm import relationship
 from database import Base
 from pydantic import BaseModel, Field
+from models.inventory import InventoryModel
+
 
 #Table declaration for Item
 class Item(Base):
@@ -10,8 +13,10 @@ class Item(Base):
     name = Column(String(50), unique=True)
     price = Column(Double)
     category = Column(String(50))
+    inventory = relationship("Inventory", back_populates="items")
 
 #Data validation for item inputs
+#USERBASE IN TUTORIAL
 class ItemBase(BaseModel):
     name: str
     price: float
@@ -22,8 +27,10 @@ class UpdateItemBase(BaseModel):
     price: float | None
     category: str | None
 
+#USER IN TUTORIAL
 class ItemModel(ItemBase):
     id: int
     category: str
+    inventory: list[InventoryModel] = []
     class Config:
         from_attributes = True

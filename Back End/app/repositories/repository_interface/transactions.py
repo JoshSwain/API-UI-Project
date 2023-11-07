@@ -12,9 +12,9 @@ class TransactionRepo(ABC):
         pass
 
     @abstractmethod
-    def read_transaction(transaction_id: int) -> transactions.Transaction:
+    def read_transaction(self, transaction_id: int) -> transactions.Transaction:
         pass
 
     @abstractmethod
-    def delete_transaction(transaction_id: int):
+    def delete_transaction(self, transaction_id: int):
         pass

@@ -28,6 +28,8 @@ class InventorySQLRepository(InventoryRepo):
         db_inventory = self.db.query(inventory.Inventory).filter(inventory.Inventory.item_id == item_id).first()
         if db_inventory is None:
             raise HTTPException(status_code=404, detail='Inventory not found')
+        elif inventory_update is None:
+            return f'Insufficient inventory, current inventory: {db_inventory.quantity}'
         for field, value in inventory_update.dict().items():
             if value is not None:
                 setattr(db_inventory, field, value)

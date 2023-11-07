@@ -8,15 +8,18 @@ class ItemSQLRepository(ItemRepo):
     def __init__(self, db: db_dependency):
         self.db = db
 
+    # def get_items(self, skip: int, limit: int) -> List[items.ItemModel]:
+    def get_items(self, skip: int, limit: int):
+        return self.db.query(items.Item).offset(skip).limit(limit).all()
+
     def create_item(self, item: items.ItemBase) -> items.Item:
+        if self.db.query(items.Item).filter(items.Item.name == item.name).first():
+            raise HTTPException(status_code=400, detail="Item with the same name already exists")
         db_item = items.Item(**item.dict())
         self.db.add(db_item)
         self.db.commit()
         self.db.refresh(db_item)
         return f'Item with id: {db_item.id} created.', db_item
-
-    def get_items(self, skip: int, limit: int) -> List[items.ItemModel]:
-        return self.db.query(items.Item).offset(skip).limit(limit).all()
 
     def get_item_by_id(self, item_id: int) -> items.Item:
         db_item = self.db.query(items.Item).filter(items.Item.id == item_id).first()

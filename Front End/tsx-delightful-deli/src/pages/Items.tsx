@@ -5,7 +5,7 @@ import api from '../api';
 import AddItemForm from '../components/items/AddItemForm';
 
 const ItemsPage: React.FC = () => {
-    const { stateitems, updateItems } = useItemState();
+  const { stateitems, updateItems} = useItemState();
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -20,7 +20,7 @@ const ItemsPage: React.FC = () => {
   return(
     <div>
         <h1>Items</h1>
-        <AddItemForm additems={stateitems} />;
+        <AddItemForm items={stateitems} />;
         <ItemsList items={stateitems} />;
     </div>
   )

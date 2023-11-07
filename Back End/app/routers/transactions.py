@@ -1,9 +1,10 @@
 from fastapi import APIRouter, Depends, status
-from dependencies import current_transaction_repo
+from dependencies import current_transaction_repo, current_inventory_repo
 from repositories.repository_interface.transactions import TransactionRepo
+from repositories.repository_interface.inventory import InventoryRepo
 from models import transactions
 from typing import List
-
+from business_logic import transaction_logic
 
 router = APIRouter(
     prefix="/transactions"
@@ -11,7 +12,12 @@ router = APIRouter(
 
 #Create a new transaction, if a transaction is successful it will add/subtract the count (quantity) of the item
 @router.post("/", status_code=status.HTTP_201_CREATED)
-async def create_transaction(transaction: transactions.TransactionBase, repository: TransactionRepo = Depends(current_transaction_repo)):
+async def create_transaction(transaction: transactions.TransactionBase, repository: TransactionRepo = Depends(current_transaction_repo), invRepo: InventoryRepo = Depends(current_inventory_repo) ):
+    current_inventory = invRepo.get_inventory_by_id(transaction.item_id)
+    inv_update = transaction_logic.transaction_logic_func(transaction=transaction, quantity=current_inventory.quantity)
+    if inv_update == 'Insufficient Inventory':
+        return print(f'Insufficient inventory, current inventory: {current_inventory.quantity}')
+    invRepo.update_inventory(transaction.item_id, inv_update)
     transaction_created = repository.create_transaction(transaction)
     return transaction_created
 

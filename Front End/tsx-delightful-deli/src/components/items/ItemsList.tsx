@@ -12,6 +12,7 @@ const ItemsList: React.FC<ItemListProps> = ({ items }) => {
             <th>ID</th>
             <th>Name</th>
             <th>Price</th>
+            <th>Quantity</th>
           </tr>
         </thead>
         <tbody>
@@ -20,6 +21,7 @@ const ItemsList: React.FC<ItemListProps> = ({ items }) => {
               <td>{items.id}</td>
               <td>{items.name}</td>
               <td>{items.price}</td>
+              <td>{items.inventory[0].quantity}</td>
             </tr>
           ))}
         </tbody>

@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List
 from models import items
 
+#Abstract Class that restricts any new DB Repo to the CRUD functions below
 class ItemRepo(ABC):
     @abstractmethod
     def create_item(self, item: items.ItemBase) -> items.Item:

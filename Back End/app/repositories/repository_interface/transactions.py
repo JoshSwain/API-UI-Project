@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List
 from models import transactions
 
+#Abstract Class that restricts any new DB Repo to the CRUD functions below
 class TransactionRepo(ABC):
     @abstractmethod
     def create_transaction(self, transaction: transactions.TransactionBase) -> transactions.Transaction:

@@ -1,8 +1,8 @@
+from typing import List
 from fastapi import APIRouter, Depends, status
 from dependencies import current_inventory_repo
 from repositories.repository_interface.inventory import InventoryRepo
 from models import inventory
-from typing import List
 
 router = APIRouter(
     prefix="/inventory"

@@ -1,9 +1,9 @@
+from typing import List
 from fastapi import APIRouter, Depends, status
 from dependencies import current_transaction_repo, current_inventory_repo
 from repositories.repository_interface.transactions import TransactionRepo
 from repositories.repository_interface.inventory import InventoryRepo
 from models import transactions
-from typing import List
 from business_logic import transaction_logic
 
 router = APIRouter(

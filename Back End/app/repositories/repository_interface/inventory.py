@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List
 from models import inventory
 
+#Abstract Class that restricts any new DB Repo to the CRUD functions below
 class InventoryRepo(ABC):
     @abstractmethod
     def create_inventory(self, inventory: inventory.InventoryBase) -> inventory.Inventory:

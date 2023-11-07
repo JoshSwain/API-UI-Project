@@ -1,6 +1,6 @@
+from typing import List
 from fastapi import HTTPException
 from repositories.repository_interface.items import ItemRepo
-from typing import List
 from models import items
 from database import db_dependency
 
@@ -8,8 +8,7 @@ class ItemSQLRepository(ItemRepo):
     def __init__(self, db: db_dependency):
         self.db = db
 
-    # def get_items(self, skip: int, limit: int) -> List[items.ItemModel]:
-    def get_items(self, skip: int, limit: int):
+    def get_items(self, skip: int, limit: int) -> List[items.ItemModel]:
         return self.db.query(items.Item).offset(skip).limit(limit).all()
 
     def create_item(self, item: items.ItemBase) -> items.Item:

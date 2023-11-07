@@ -1,6 +1,6 @@
+from typing import List
 from fastapi import HTTPException
 from repositories.repository_interface.inventory import InventoryRepo
-from typing import List
 from models import inventory
 from database import db_dependency
 

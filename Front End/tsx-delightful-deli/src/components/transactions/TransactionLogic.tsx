@@ -1,4 +1,3 @@
-import { TransactionType } from "../types/transactions";
 import { ItemType } from "../types/item";
 
 export function transactionLogic(

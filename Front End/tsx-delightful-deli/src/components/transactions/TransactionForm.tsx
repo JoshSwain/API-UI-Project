@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import { TransactionType } from '../types/transactions';
 import { CustomChangeEvent, CustomFormEvent } from '../types/events';
 import api from '../../api';
 import { ItemType } from '../types/item';

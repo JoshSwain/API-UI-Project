@@ -6,7 +6,7 @@ import AddItemForm from '../components/items/AddItemForm';
 
 const ItemsPage: React.FC = () => {
   const { stateitems, updateItems} = useItemState();
-
+  //NOTE TO JOSH: updateItems needs to be included in the dependency array without making the app constantly update
   useEffect(() => {
     const fetchItems = async () => {
       const response = await api.get('/items/');

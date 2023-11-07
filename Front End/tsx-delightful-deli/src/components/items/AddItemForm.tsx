@@ -2,14 +2,13 @@ import React, {useState} from 'react'
 import { CustomChangeEvent, CustomFormEvent } from '../types/events';
 import api from '../../api';
 import { ItemType } from '../types/item';
-import useItemState from './itemState';
-import ItemsPage from '../../pages/Items';
+import { itemValidator } from './ItemLogic';
 
 const AddItemForm: React.FC<{ items: ItemType[]}> = ({ items }) => {
 
     const [formData, setFormData] = useState({
         name: "Input Item Name",
-        price: 0,
+        price: '0',
         category: 'sandwiches'
         })
 
@@ -19,21 +18,16 @@ const AddItemForm: React.FC<{ items: ItemType[]}> = ({ items }) => {
         [event.target.name]: event.target.value,
         });
     }
-    
+
     const itemWithSameName = items.find((item) => item.name === formData.name);
 
     const handleFormSubmit = async (event: CustomFormEvent) => {
         event.preventDefault();
         console.log("Attempt to post item:", formData)
-        if (
-            formData.name === "Input Item Name" ||
-            formData.name.trim() === "" ||
-            formData.price === null ||
-            formData.price === 0 ||
-            isNaN(formData.price)
-            ) {
-            alert("Please enter an item name and price!");
-            return;
+        const validationError = itemValidator(formData)
+        if (validationError) {
+          alert(validationError);
+          return;
         } else if (itemWithSameName) {
             alert("An item already has that name, please choose another.")
             return;

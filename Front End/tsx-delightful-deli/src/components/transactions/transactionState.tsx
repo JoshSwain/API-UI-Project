@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { TransactionType } from '../types/transactions';
 
 const useTransactionState = () => {

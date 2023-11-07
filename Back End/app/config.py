@@ -1,3 +1,4 @@
-import os
+MYSQL_URL_DATABASE = 'mysql+pymysql://root:root@localhost:3306/delightfuldeli'
 
-URL_DATABASE = os.getenv('URL_DATABASE')
+CURRENT_URL_DATABASE = MYSQL_URL_DATABASE
+

@@ -3,9 +3,9 @@ from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.ext.declarative import declarative_base
 from fastapi import Depends
 from typing import Annotated
-from config import URL_DATABASE
+from config import CURRENT_URL_DATABASE
 
-engine = create_engine(URL_DATABASE)
+engine = create_engine(CURRENT_URL_DATABASE)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 

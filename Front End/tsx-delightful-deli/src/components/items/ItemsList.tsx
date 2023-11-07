@@ -1,7 +1,5 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { ItemType, ItemListProps } from '../types/item';
-import useItemState from './itemState';
-import api from '../../api';
 
 const ItemsList: React.FC<ItemListProps> = ({ items }) => {
     return (

@@ -7,17 +7,18 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions }) => {
       <table className="table table-striped table-bordered table-hover">
         <thead>
           <tr>
+            <th>Item ID</th>
             <th>Count</th>
             <th>Direction</th>
-            <th>Item ID</th>
           </tr>
         </thead>
         <tbody>
           {transactions.map((transaction: TransactionType) => (
             <tr key={transaction.id}>
+              <td>{transaction.item_id}</td>
               <td>{transaction.count}</td>
               <td>{transaction.direction}</td>
-              <td>{transaction.item_id}</td>
+
             </tr>
           ))}
         </tbody>

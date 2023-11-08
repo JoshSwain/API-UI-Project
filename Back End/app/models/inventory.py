@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Integer, String, Float, Double, DATETIME,ForeignKey
+from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from database import Base
 from pydantic import BaseModel
@@ -15,7 +15,6 @@ class Inventory(Base):
 
 #Data validation for item inputs
 #SCHEMAS
-#ITEM BASE IN TUTORIAL
 class InventoryBase(BaseModel):
     item_id: int
     quantity: int
@@ -23,7 +22,6 @@ class InventoryBase(BaseModel):
 class UpdateInventoryBase(BaseModel):
     quantity: int
 
-#ITEM IN TUTORIAL
 class InventoryModel(InventoryBase):
     item_id: int
     id: int

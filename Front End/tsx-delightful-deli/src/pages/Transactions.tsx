@@ -4,6 +4,7 @@ import useItemState from '../components/items/itemState';
 import TransactionList from '../components/transactions/TransactionsList';
 import api from '../api';
 import TransactionForm from '../components/transactions/TransactionForm';
+// import NewTransactionList from '../components/transactions/NewTransactionsList';
 
 const TransactionPage: React.FC = () => {
   const { transactions, updateTransactions } = useTransactionState();
@@ -28,8 +29,8 @@ const TransactionPage: React.FC = () => {
   return (
     <div>
       <h1>Transactions</h1>
-
       <TransactionForm items={stateitems}/>
+      {/* <NewTransactionList transactions={transactions} items={stateitems}/> */}
       <TransactionList transactions={transactions} />
     </div>
   )

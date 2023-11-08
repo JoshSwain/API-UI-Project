@@ -7,7 +7,7 @@ import { itemValidator } from './ItemLogic';
 const AddItemForm: React.FC<{ items: ItemType[]}> = ({ items }) => {
 
     const [formData, setFormData] = useState({
-        name: "Input Item Name",
+        name: "",
         price: '0',
         category: 'sandwiches'
         })
@@ -46,7 +46,7 @@ const AddItemForm: React.FC<{ items: ItemType[]}> = ({ items }) => {
                 <label htmlFor='name' className='form-label'>
                   Item Name
                 </label>
-                <input type='text' className='form-control' id='name' name='name' onChange={handleInputChange} value={formData.name}/>
+                <input type='text' className='form-control' id='name' name='name' placeholder='Input Item Name' onChange={handleInputChange} value={formData.name}/>
               </div>
 
               <div className='mb-3'>
@@ -63,7 +63,7 @@ const AddItemForm: React.FC<{ items: ItemType[]}> = ({ items }) => {
                 <label htmlFor='price' className='form-label'>
                   Price
                 </label>
-                <input type='number' step={0.01} className='form-control' id='price' name='price' onChange={handleInputChange} value={formData.price}/>
+                <input type='number' step={0.01}  className='form-control' id='price' name='price' onChange={handleInputChange} value={formData.price}/>
               </div>
               <button type='submit' className='btn btn-primary mb-3'>
                 Submit

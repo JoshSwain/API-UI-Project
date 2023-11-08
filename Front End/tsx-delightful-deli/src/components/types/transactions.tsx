@@ -1,3 +1,5 @@
+import { ItemType } from "./item";
+
 export {};
 
 export type TransactionType = {
@@ -9,4 +11,5 @@ export type TransactionType = {
 
 export type TransactionListProps = {
     transactions: TransactionType[];
+    // items: ItemType[];
 };

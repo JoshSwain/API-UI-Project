@@ -12,6 +12,9 @@ export function transactionLogic(
     if (!selectedInventory) {
       return "Selected item not found.";
     }
+    if (!formData.count) {
+      return "Please enter a valid count."
+    }
 
     if (formData.direction === 'Sale' && formData.count > selectedInventory.inventory[0].quantity) {
       return "Insufficient inventory for Transaction, current quantity: " + selectedInventory.inventory[0].quantity;

@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 from database import Base
 from pydantic import BaseModel, Field
 from models.inventory import InventoryModel
+from models.transactions import TransactionModel
 
 
 #Table declaration for Item
@@ -14,9 +15,9 @@ class Item(Base):
     price = Column(Double)
     category = Column(String(50))
     inventory = relationship("Inventory", back_populates="items")
+    # transactions = relationship("Transaction", back_populates="transaction")
 
 #Data validation for item inputs
-#USERBASE IN TUTORIAL
 class ItemBase(BaseModel):
     name: str
     price: float
@@ -27,10 +28,11 @@ class UpdateItemBase(BaseModel):
     price: float | None
     category: str | None
 
-#USER IN TUTORIAL
+
 class ItemModel(ItemBase):
     id: int
     category: str
     inventory: list[InventoryModel] = []
+    # transactions: list[TransactionModel] = []
     class Config:
         from_attributes = True

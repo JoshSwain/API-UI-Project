@@ -21,13 +21,6 @@ const TransactionForm: React.FC<{ items: ItemType[]}> = ({ items }) => {
     const handleFormSubmit = async (event: CustomFormEvent) => {
         event.preventDefault();
         console.log("Attempt to post transaction:", formData)
-        if (
-            formData.count === null
-            // FIX HERE JOSH: null value being accepted after backspacing on count
-        ) {
-            alert("Please enter a valid count")
-            return
-        }
 
         const validationError = transactionLogic(formData, items.find((item) => (item.id === parseInt(formData.item_id, 10))));
 

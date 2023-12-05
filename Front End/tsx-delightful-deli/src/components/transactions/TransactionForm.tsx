@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import { CustomChangeEvent, CustomFormEvent } from '../types/events';
-import api from '../../api';
 import { ItemType } from '../types/item';
 import { transactionLogic } from './TransactionLogic';
+import postObject from '../api/postObject';
 
-const TransactionForm: React.FC<{ items: ItemType[]}> = ({ items }) => {
+const TransactionForm: React.FC<{ items: ItemType[], getTransactionHandler: () => void, getItemHandler: () => void}> = ({ items, getTransactionHandler, getItemHandler }) => {
     const [ formData, setFormData] = useState( {
         count: 0,
         direction: 'Sale',
@@ -28,11 +28,10 @@ const TransactionForm: React.FC<{ items: ItemType[]}> = ({ items }) => {
           alert(validationError);
           return;
         }
+        postObject('transaction', formData, getTransactionHandler, getItemHandler)
 
-        const response = await api.post('/transactions/', formData);
-        console.log("Post Response: ", response.status);
-        window.location.reload();
-    }
+        }
+    
 
     return (
             <div className='container'>

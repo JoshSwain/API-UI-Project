@@ -1,7 +1,7 @@
 from fastapi import Depends
 from models import transactions, inventory
 from repositories.repository_interface.inventory import InventoryRepo
-from dependencies import current_inventory_repo
+from repo_selector import current_inventory_repo
 
 
 #Subtracts/Adds Count from transaction to an item's inventory quantity

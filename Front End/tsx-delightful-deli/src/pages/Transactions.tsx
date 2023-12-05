@@ -1,36 +1,29 @@
-import React, {useEffect} from 'react'
-import useTransactionState from '../components/transactions/transactionState';
-import useItemState from '../components/items/itemState';
+import React, {useState} from 'react'
+import { ItemType } from '../components/types/item';
+import { TransactionType } from '../components/types/transactions';
 import TransactionList from '../components/transactions/TransactionsList';
-import api from '../api';
 import TransactionForm from '../components/transactions/TransactionForm';
-// import NewTransactionList from '../components/transactions/NewTransactionsList';
+import getObject from '../components/api/getObject';
+
 
 const TransactionPage: React.FC = () => {
-  const { transactions, updateTransactions } = useTransactionState();
-  const { stateitems, updateItems } = useItemState();
+  const [ transactions, setTransactions ] = useState<TransactionType[]>([]);
+  const [ items, setItems ] = useState<ItemType[]>([]);
 
-  useEffect(() => {
-    const fetchTransactions = async () => {
-      const response = await api.get('/transactions/');
-      updateTransactions(response.data);
-      console.log(response.data);
-    };
-    const fetchItems = async () => {
-      const response = await api.get('/items');
-      console.log("Transaction Get request status:",response.status)
-      updateItems(response.data);
-      ;
-    }
-    fetchTransactions();
-    fetchItems();
-  }, []);
+  const getTransactionHandler = () => {
+    getObject('transaction', transactions, setTransactions)
+  }
+  const getItemHandler = () => {
+    getObject('item', items, setItems)
+  }
+
+  getTransactionHandler();
+  getItemHandler();
 
   return (
     <div>
       <h1>Transactions</h1>
-      <TransactionForm items={stateitems}/>
-      {/* <NewTransactionList transactions={transactions} items={stateitems}/> */}
+      <TransactionForm items={items} getTransactionHandler={getTransactionHandler} getItemHandler= {getItemHandler}/>
       <TransactionList transactions={transactions} />
     </div>
   )

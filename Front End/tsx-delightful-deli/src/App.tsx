@@ -15,7 +15,9 @@ const App = () => {
                   Delightful Deli Inventory Tool
                 </Link>
                 <Link to="/transactions" className='navbar-brand'>Transactions</Link>
+
                 <Link to="/items" className='navbar-brand'>Items</Link>
+
               </div>
       </nav>
       <Routes>

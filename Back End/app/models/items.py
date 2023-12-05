@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Integer, String, Float, Double, DATETIME
+from sqlalchemy import Column, Integer, String, Double
 from sqlalchemy.orm import relationship
 from database import Base
 from pydantic import BaseModel, Field

@@ -1,27 +1,23 @@
-import React, {useEffect} from 'react'
-import useItemState from '../components/items/itemState';
+import React, {useState} from 'react'
+import { ItemType } from '../components/types/item';
 import ItemsList from '../components/items/ItemsList';
-import api from '../api';
 import AddItemForm from '../components/items/AddItemForm';
+import getObject from '../components/api/getObject';
 
 const ItemsPage: React.FC = () => {
-  const { stateitems, updateItems} = useItemState();
-  //NOTE TO JOSH: updateItems needs to be included in the dependency array without making the app constantly update
-  useEffect(() => {
-    const fetchItems = async () => {
-      const response = await api.get('/items/');
-      console.log("Get request status: ", response.status)
-      updateItems(response.data);
-    };
+  const [items, setItems] = useState<ItemType[]>([]);
+  const getItemHandler = () => {
+    getObject('item', items, setItems)
+  }
+  getItemHandler()
+  // fetchItems();
 
-    fetchItems();
-  }, []);
 
   return(
     <div>
         <h1>Items</h1>
-        <AddItemForm items={stateitems} />;
-        <ItemsList items={stateitems} />;
+        <AddItemForm getItemHandler = {getItemHandler} items={items} />;
+        <ItemsList items={items} />;
     </div>
   )
 

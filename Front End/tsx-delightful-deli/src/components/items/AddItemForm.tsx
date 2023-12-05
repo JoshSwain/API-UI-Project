@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import { CustomChangeEvent, CustomFormEvent } from '../types/events';
-import api from '../../api';
 import { ItemType } from '../types/item';
 import { itemValidator } from './ItemLogic';
+import postObject from '../api/postObject';
 
-const AddItemForm: React.FC<{ items: ItemType[]}> = ({ items }) => {
+const AddItemForm: React.FC<{getItemHandler: () => void, items: ItemType[]}> = ({ getItemHandler, items }) => {
 
     const [formData, setFormData] = useState({
         name: "",
@@ -23,7 +23,7 @@ const AddItemForm: React.FC<{ items: ItemType[]}> = ({ items }) => {
 
     const handleFormSubmit = async (event: CustomFormEvent) => {
         event.preventDefault();
-        console.log("Attempt to post item:", formData)
+        console.log("Attempt to  post item:", formData)
         const validationError = itemValidator(formData)
         if (validationError) {
           alert(validationError);
@@ -32,10 +32,8 @@ const AddItemForm: React.FC<{ items: ItemType[]}> = ({ items }) => {
             alert("An item already has that name, please choose another.")
             return;
         }
+        postObject('item', formData, getItemHandler)
 
-        const post_response = await api.post('/items/', formData);
-        console.log("Post Response: ", post_response.status);
-        window.location.reload();
 
     }
 

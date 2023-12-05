@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from routers import items, transactions, inventory
-from middleware import current_middleware
+from middleware_selector import current_middleware
 app = FastAPI()
 
 origins = [

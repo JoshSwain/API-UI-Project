@@ -1,39 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Button, Container, Typography } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+import containerCenterStyle from '../components/styles/containerStyles';
 
 const HomePage: React.FC = () => {
-//NOTE TO JOSH: THESE TYPES SHOULD BE DEFINED ELSEWHERE
-    const containerStyle: React.CSSProperties = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100vh',  
-  };
-
-  const buttonStyle: React.CSSProperties = {
-    display: 'block',
-    margin: '10px',  
-    padding: '10px 20px',
-    fontSize: '1.5rem',
-    backgroundColor: '#007bff',
-    color: 'white',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    textDecoration: 'none',
-  };
 
   return (
-    <div style={containerStyle}>
-      <h1>Welcome!</h1>
-      <Link to="/transactions" style={buttonStyle}>
+    <Container style={containerCenterStyle}>
+      <Typography variant="h2" component="h1">
+        Welcome!
+      </Typography>
+      <Button
+        component={RouterLink}
+        to="/transactions"
+        variant="contained"
+        style={{ margin: '10px' }}
+      >
         Transactions
-      </Link>
-      <Link to="/items" style={buttonStyle}>
+      </Button>
+      <Button
+        component={RouterLink}
+        to="/items"
+        variant="contained"
+        style={{ margin: '10px' }}
+      >
         Items
-      </Link>
-    </div>
+      </Button>
+    </Container>
   );
 };
 

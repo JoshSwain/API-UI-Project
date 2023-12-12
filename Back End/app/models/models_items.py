@@ -2,8 +2,8 @@ from sqlalchemy import Column, Integer, String, Double
 from sqlalchemy.orm import relationship
 from database import Base
 from pydantic import BaseModel, Field
-from models.inventory import InventoryModel
-from models.transactions import TransactionModel
+from models.models_inventory import InventoryModel
+from models.models_transactions import TransactionModel
 
 
 #Table declaration for Item
@@ -14,7 +14,7 @@ class Item(Base):
     name = Column(String(50), unique=True)
     price = Column(Double)
     category = Column(String(50))
-    inventory = relationship("Inventory", back_populates="items")
+    inventory = relationship("Inventory", back_populates="items", cascade="all, delete-orphan")
     # transactions = relationship("Transaction", back_populates="transaction")
 
 #Data validation for item inputs

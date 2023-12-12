@@ -1,7 +1,7 @@
 
 export type PostBodyType= {
 name: string,
-price: string,
+price: number,
 category: string
 } | {
 count: number,

@@ -1,8 +1,8 @@
 from typing import List
 from fastapi import APIRouter, Depends, status
 from repo_selector import current_item_repo
-from repositories.repository_interface.items import ItemRepo
-from models.items import ItemModel, UpdateItemBase, ItemBase
+from repositories.repository_interface.repo_items import ItemRepo
+from models.models_items import ItemModel, UpdateItemBase, ItemBase
 
 router = APIRouter(
     prefix="/items"

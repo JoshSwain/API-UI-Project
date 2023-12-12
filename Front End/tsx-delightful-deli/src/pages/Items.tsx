@@ -3,6 +3,8 @@ import { ItemType } from '../components/types/item';
 import ItemsList from '../components/items/ItemsList';
 import AddItemForm from '../components/items/AddItemForm';
 import getObject from '../components/api/getObject';
+import Typography from '@mui/material/Typography'
+import { Container } from '@mui/material';
 
 const ItemsPage: React.FC = () => {
   const [items, setItems] = useState<ItemType[]>([]);
@@ -14,11 +16,11 @@ const ItemsPage: React.FC = () => {
 
 
   return(
-    <div>
-        <h1>Items</h1>
-        <AddItemForm getItemHandler = {getItemHandler} items={items} />;
-        <ItemsList items={items} />;
-    </div>
+    <Container>
+        <Typography variant="h2" component="h1">Items</Typography>
+        <AddItemForm getItemHandler = {getItemHandler} items={items} />
+        <ItemsList items={items} />
+    </Container>
   )
 
 };

@@ -1,7 +1,7 @@
 from typing import List
 from fastapi import HTTPException
-from repositories.repository_interface.items import ItemRepo
-from models.items import Item, ItemBase, ItemModel, UpdateItemBase
+from repositories.repository_interface.repo_items import ItemRepo
+from models.models_items import Item, ItemBase, ItemModel, UpdateItemBase
 from database import db_dependency
 
 class ItemSQLRepository(ItemRepo):
@@ -38,5 +38,3 @@ class ItemSQLRepository(ItemRepo):
         db_item = self.get_item_by_id(item_id)
         self.db.delete(db_item)
         self.db.commit()
-
-

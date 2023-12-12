@@ -1,8 +1,8 @@
 from typing import List
 from datetime import datetime
-from repositories.repository_interface.transactions import TransactionRepo
+from repositories.repository_interface.repo_transactions import TransactionRepo
 from database import db_dependency
-from models.transactions import Transaction, TransactionBase, TransactionModel
+from models.models_transactions import Transaction, TransactionBase, TransactionModel
 from fastapi import HTTPException
 
 class TransactionSQLRepository(TransactionRepo):
@@ -14,7 +14,7 @@ class TransactionSQLRepository(TransactionRepo):
         db_transaction.timestamp = datetime.now()
         self.db.add(db_transaction)
         self.db.commit()
-        return f'{db_transaction.direction} of item with ID: {db_transaction.item_id} completed successfully'
+        return f'{db_transaction.direction} of item with ID: {db_transaction.item_id} completed successfully', db_transaction
 
     def read_transactions(self, skip: int = 0, limit: int = 100) -> List[TransactionModel]:
         db_transactions = self.db.query(Transaction).offset(skip).limit(limit).all()

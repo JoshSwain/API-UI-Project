@@ -1,74 +1,92 @@
-import React, {useState} from 'react'
-import { CustomChangeEvent, CustomFormEvent } from '../types/events';
+import React, { useState } from 'react';
+import { CustomFormEvent } from '../types/events';
 import { ItemType } from '../types/item';
-import { itemValidator } from './ItemLogic';
 import postObject from '../api/postObject';
+import { Button, Container, TextField, MenuItem, Stack, InputAdornment } from '@mui/material';
+import itemHandleFormSubmit from './itemHandleFormSubmit';
 
-const AddItemForm: React.FC<{getItemHandler: () => void, items: ItemType[]}> = ({ getItemHandler, items }) => {
 
-    const [formData, setFormData] = useState({
-        name: "",
-        price: '0',
-        category: 'sandwiches'
-        })
+const AddItemForm: React.FC<{ getItemHandler: () => void; items: ItemType[] }> = ({ getItemHandler, items }) => {
 
-    const handleInputChange = (event: CustomChangeEvent) => {
-        setFormData({
-        ...formData,
-        [event.target.name]: event.target.value,
-        });
+  const [formData, setFormData] = useState({
+    name: '',
+    price: 0,
+    category: 'sandwiches',
+  });
+
+  const handleInputChange = (event: any) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleFormSubmit = async (event: CustomFormEvent) => {
+    event.preventDefault();
+    const response = itemHandleFormSubmit(items, formData)
+    if (response) {
+      alert(response)
+      return
     }
+    postObject('item', formData, getItemHandler);
+  };
 
-    const itemWithSameName = items.find((item) => item.name === formData.name);
+  return (
+    <Container>
+        <form onSubmit={handleFormSubmit}>
+          <Stack spacing={4}>
+            <Stack direction='row' spacing={2}>
 
-    const handleFormSubmit = async (event: CustomFormEvent) => {
-        event.preventDefault();
-        console.log("Attempt to  post item:", formData)
-        const validationError = itemValidator(formData)
-        if (validationError) {
-          alert(validationError);
-          return;
-        } else if (itemWithSameName) {
-            alert("An item already has that name, please choose another.")
-            return;
-        }
-        postObject('item', formData, getItemHandler)
+            <TextField
+              label="Item Name"
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Input Item Name"
+              onChange={handleInputChange}
+              value={formData.name}
+              fullWidth
+              required
+              autoCorrect='False'
+            />
 
+            <TextField
 
-    }
+              id="category"
+              name="category"
+              onChange={handleInputChange}
+              value={formData.category}
+              fullWidth
+              required
+              select={true}
+            >
+              <MenuItem value="sandwiches">Sandwich</MenuItem>
+              <MenuItem value="beverages">Beverage</MenuItem>
+            </TextField>
 
-    return (
-        <div className='container'>
-            <form onSubmit={handleFormSubmit}>
-              <div className='mb-3 mt-3'>
-                <label htmlFor='name' className='form-label'>
-                  Item Name
-                </label>
-                <input type='text' className='form-control' id='name' name='name' placeholder='Input Item Name' onChange={handleInputChange} value={formData.name}/>
-              </div>
+            <TextField
+              type="number"
+              id="price"
+              name="price"
+              onChange={handleInputChange}
+              value={formData.price}
+              fullWidth
+              required
+              InputProps={{
+                startAdornment: <InputAdornment position='start'>$</InputAdornment>
+              }}
+            />
+            </Stack>
+            <Button type="submit" variant="outlined">
+              Submit
+            </Button>
 
-              <div className='mb-3'>
-                <label htmlFor='category' className='form-label'>
-                  Category
-                </label>
-                <select className='form-select' id='category' name='category' onChange={handleInputChange} value={formData.category}>
-                  <option value='sandwiches'>Sandwich</option>
-                  <option value='beverages'>Beverage</option>
-                </select>
-              </div>
+          </Stack>
 
-              <div className='mb-3 mt-3'>
-                <label htmlFor='price' className='form-label'>
-                  Price
-                </label>
-                <input type='number' step={0.01}  className='form-control' id='price' name='price' onChange={handleInputChange} value={formData.price}/>
-              </div>
-              <button type='submit' className='btn btn-primary mb-3'>
-                Submit
-                </button>
+        </form>
 
-            </form>
-            </div>
-        )
-    }
+    </Container>
+  );
+};
+
 export default AddItemForm;

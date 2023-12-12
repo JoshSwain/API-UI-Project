@@ -8,7 +8,7 @@ class Inventory(Base):
     __tablename__ = 'inventory'
 
     id = Column(Integer, primary_key=True, index=True)
-    item_id = Column(Integer, ForeignKey("items.id"))
+    item_id = Column(Integer, ForeignKey("items.id", ondelete='CASCADE'))
     quantity = Column(Integer)
     items = relationship("Item", back_populates="inventory")
 

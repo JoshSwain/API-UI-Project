@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import items, transactions, inventory
+from routers import router_items, router_transactions, router_inventory
 from middleware_selector import current_middleware
 app = FastAPI()
 
@@ -15,6 +15,6 @@ app.add_middleware(
     allow_headers=['*']
 )
 
-app.include_router(items.router)
-app.include_router(transactions.router)
-app.include_router(inventory.router)
+app.include_router(router_items.router)
+app.include_router(router_transactions.router)
+app.include_router(router_inventory.router)

@@ -4,7 +4,8 @@ import { TransactionType } from '../components/types/transactions';
 import TransactionList from '../components/transactions/TransactionsList';
 import TransactionForm from '../components/transactions/TransactionForm';
 import getObject from '../components/api/getObject';
-
+import Typography from '@mui/material/Typography'
+import { Container } from '@mui/material';
 
 const TransactionPage: React.FC = () => {
   const [ transactions, setTransactions ] = useState<TransactionType[]>([]);
@@ -21,11 +22,11 @@ const TransactionPage: React.FC = () => {
   getItemHandler();
 
   return (
-    <div>
-      <h1>Transactions</h1>
-      <TransactionForm items={items} getTransactionHandler={getTransactionHandler} getItemHandler= {getItemHandler}/>
-      <TransactionList transactions={transactions} />
-    </div>
+    <Container>
+      <Typography variant="h2" component="h1">Transactions</Typography>
+      <TransactionForm items={items} getTransactionHandler={getTransactionHandler} getItemHandler= {getItemHandler}/>;
+      <TransactionList transactions={transactions} />;
+    </Container>
   )
 
 };

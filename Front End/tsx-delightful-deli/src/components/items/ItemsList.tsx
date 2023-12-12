@@ -1,33 +1,35 @@
 import React from 'react';
 import { ItemType, ItemListProps } from '../types/item';
+import { Container, Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
 
 const ItemsList: React.FC<ItemListProps> = ({ items }) => {
-    const sortedItems = [...items].sort((a, b) => b.id - a.id);
-    return (
-    <div>
-      <table className="table table-striped table-bordered table-hover">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Quantity</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sortedItems.map((items: ItemType) => (
-            <tr key={items.id}>
-              <td>{items.id}</td>
-              <td>{items.name}</td>
-              <td>{items.price}</td>
-              <td>{items.category}</td>
-              <td>{items.inventory[0].quantity}</td>
-            </tr>
+  const sortedItems = [...items].sort((a, b) => b.id - a.id);
+
+  return (
+    <Container>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>ID</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Price</TableCell>
+            <TableCell>Category</TableCell>
+            <TableCell>Quantity</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {sortedItems.map((item: ItemType) => (
+            <TableRow key={item.id}>
+              <TableCell>{item.id}</TableCell>
+              <TableCell>{item.name}</TableCell>
+              <TableCell>{item.price}</TableCell>
+              <TableCell>{item.category}</TableCell>
+              <TableCell>{item.inventory[0].quantity}</TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
-    </div>
+        </TableBody>
+      </Table>
+    </Container>
   );
 };
 

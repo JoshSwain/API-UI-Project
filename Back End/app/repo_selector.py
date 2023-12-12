@@ -1,6 +1,6 @@
-from repositories.sql_repository.items import ItemSQLRepository
-from repositories.sql_repository.transactions import TransactionSQLRepository
-from repositories.sql_repository.inventory import InventorySQLRepository
+from repositories.sql_repository.sql_repo_items import ItemSQLRepository
+from repositories.sql_repository.sql_repo_transactions import TransactionSQLRepository
+from repositories.sql_repository.sql_repo_inventory import InventorySQLRepository
 
 current_item_repo = ItemSQLRepository
 current_transaction_repo = TransactionSQLRepository

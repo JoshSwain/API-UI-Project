@@ -1,7 +1,7 @@
 from typing import List
 from fastapi import HTTPException
-from repositories.repository_interface.inventory import InventoryRepo
-from models.inventory import Inventory, InventoryBase, InventoryModel, UpdateInventoryBase
+from repositories.repository_interface.repo_inventory import InventoryRepo
+from models.models_inventory import Inventory, InventoryBase, InventoryModel, UpdateInventoryBase
 from database import db_dependency
 
 class InventorySQLRepository(InventoryRepo):

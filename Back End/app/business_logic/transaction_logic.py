@@ -1,12 +1,13 @@
 from fastapi import Depends
-from models import transactions, inventory
-from repositories.repository_interface.inventory import InventoryRepo
+from models.models_transactions import TransactionBase
+from models.models_inventory import UpdateInventoryBase
+from repositories.repository_interface.repo_inventory import InventoryRepo
 from repo_selector import current_inventory_repo
 
 
 #Subtracts/Adds Count from transaction to an item's inventory quantity
 
-def transaction_logic_func(transaction: transactions.TransactionBase, quantity: int, repository: InventoryRepo = Depends(current_inventory_repo)):
+def transaction_logic_func(transaction: TransactionBase, quantity: int, repository: InventoryRepo = Depends(current_inventory_repo)):
     new_quantity = None
     if transaction.direction == 'Sale':
         new_quantity = quantity - transaction.count
@@ -15,6 +16,6 @@ def transaction_logic_func(transaction: transactions.TransactionBase, quantity: 
     elif transaction.direction == 'Restock':
         new_quantity = quantity + transaction.count
     if new_quantity is not None:
-        inventory_update = inventory.UpdateInventoryBase(quantity=new_quantity)
+        inventory_update = UpdateInventoryBase(quantity=new_quantity)
         return inventory_update
 

@@ -1,6 +1,7 @@
 import pytest
 import requests
 from app.config import FASTAPI_URL
+from unit_testing.test_transactions_routers import get_tester
 
 obj_path = "/items/"
 item_url = f"{FASTAPI_URL}{obj_path}"
@@ -18,6 +19,8 @@ test_item_update = {
   "category": None
 }
 
+
+
 #Unit Test For Item, creates an item, then cycles through CRUD operations before deleting
 @pytest.fixture
 def test_post_item():
@@ -33,10 +36,10 @@ def test_post(test_post_item):
 
     id = body["id"]
 
-    def get_tester(url):
-        test_obj = requests.get(url)
-        print(url, test_obj.status_code)
-        assert test_obj.status_code == 200
+    # def get_tester(url):
+    #     test_obj = requests.get(url)
+    #     print(url, test_obj.status_code)
+    #     assert test_obj.status_code == 200
 
     get_tester(f"{item_url}{id}")
 

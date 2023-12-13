@@ -1,5 +1,5 @@
 import api from "../../api";
-import { PostBodyType } from '../types/PostObjType'
+import { PostBodyType } from '../../types/PostObjType'
 import domainRouter from "./domainRouter";
 
 const postObject = async (domain: string, body: PostBodyType, handler: () => void, secondary_handler?: () => void ) => {
@@ -10,11 +10,15 @@ const postObject = async (domain: string, body: PostBodyType, handler: () => voi
 
   console.log("Post Response: ", postResponse.status);
 
+//Secondary Handler refreshes the items list after a transaction is posted
   if (postResponse.status === 201) {
     handler()
     if (secondary_handler) {
         secondary_handler()
     }
+  } else if (postResponse.status === 404) {
+    console.log("Failed to post object: ", domain)
+    return
   }
 }
 

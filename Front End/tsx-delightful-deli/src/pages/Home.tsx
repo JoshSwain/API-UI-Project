@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Container, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import containerCenterStyle from '../components/styles/containerStyles';
+import containerCenterStyle from '../themes/styles/containerStyles';
 
 const HomePage: React.FC = () => {
 

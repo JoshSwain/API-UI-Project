@@ -2,8 +2,7 @@ import os
 
 MYSQL_URL_DATABASE = os.environ.get('URL_DATABASE')
 
-# FASTAPI_URL = os.environ.get('URL_API')
-FASTAPI_URL = 'http://127.0.0.1:8000'
+FASTAPI_URL = os.environ.get('URL_API')
 
 CURRENT_URL_DATABASE = MYSQL_URL_DATABASE
 

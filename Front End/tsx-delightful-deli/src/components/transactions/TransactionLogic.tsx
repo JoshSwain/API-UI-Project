@@ -1,5 +1,4 @@
-import { ItemType } from "../types/item";
-import { PostBodyType } from "../types/PostObjType";
+import { ItemType } from "../../types/item";
 
 export function transactionLogic(
     formData: {

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { ItemType } from '../components/types/item';
+import { ItemType } from '../types/item';
 import ItemsList from '../components/items/ItemsList';
 import AddItemForm from '../components/items/AddItemForm';
 import getObject from '../components/api/getObject';
@@ -12,7 +12,6 @@ const ItemsPage: React.FC = () => {
     getObject('item', items, setItems)
   }
   getItemHandler()
-  // fetchItems();
 
 
   return(

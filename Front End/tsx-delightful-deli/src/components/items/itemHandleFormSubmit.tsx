@@ -1,4 +1,4 @@
-import { ItemType } from "../types/item";
+import { ItemType } from "../../types/item";
 
 const itemHandleFormSubmit = (
     items: ItemType[],

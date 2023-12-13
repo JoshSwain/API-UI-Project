@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import { ItemType } from '../components/types/item';
-import { TransactionType } from '../components/types/transactions';
+import { ItemType } from '../types/item';
+import { TransactionType } from '../types/transactions';
 import TransactionList from '../components/transactions/TransactionsList';
 import TransactionForm from '../components/transactions/TransactionForm';
 import getObject from '../components/api/getObject';

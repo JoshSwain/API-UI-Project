@@ -1,5 +1,5 @@
 import { transactionLogic } from "./TransactionLogic";
-import { ItemType } from "../types/item";
+import { ItemType } from "../../types/item";
 
 const transactionHandleFormSubmit = (
     items: ItemType[],

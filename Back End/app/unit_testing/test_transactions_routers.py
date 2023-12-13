@@ -10,6 +10,10 @@ item_url = f"{FASTAPI_URL}/items/"
 
 inventory_url = f"{FASTAPI_URL}/inventory/"
 
+def get_tester(url):
+    test_obj = requests.get(url)
+    print(url, test_obj.status_code)
+    assert test_obj.status_code == 200
 
 #Unit Test for Transactions/Inventory, creates an item, creates a restocking transaction on it, tests the effects, and then deletes the item.
 @pytest.fixture
@@ -35,10 +39,7 @@ def test_post(test_post_item):
     assert transaction_body["item_id"] == test_transaction["item_id"]
     assert transaction_body["direction"] == test_transaction["direction"]
 
-    def get_tester(url):
-        test_obj = requests.get(url)
-        print(url, test_obj.status_code)
-        assert test_obj.status_code == 200
+
 
     get_tester(f"{url}{transaction_id}")
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { CustomFormEvent } from '../types/events';
-import { ItemType } from '../types/item';
+import { CustomFormEvent } from '../../types/events';
+import { ItemType } from '../../types/item';
 import postObject from '../api/postObject';
 import { Button, Container, TextField, MenuItem, Stack, InputAdornment } from '@mui/material';
 import itemHandleFormSubmit from './itemHandleFormSubmit';

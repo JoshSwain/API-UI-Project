@@ -15,6 +15,6 @@ app.add_middleware(
     allow_headers=['*']
 )
 
-app.include_router(router_items.router)
-app.include_router(router_transactions.router)
-app.include_router(router_inventory.router)
+app.include_router(router_items.router, tags=["items"])
+app.include_router(router_transactions.router, tags=["transactions"])
+app.include_router(router_inventory.router, tags=["inventory"])

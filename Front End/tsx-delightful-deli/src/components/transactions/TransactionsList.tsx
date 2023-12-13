@@ -1,5 +1,5 @@
 import React from 'react';
-import { TransactionType, TransactionListProps } from '../types/transactions';
+import { TransactionType, TransactionListProps } from '../../types/transactions';
 import { Container, Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
 
 const TransactionList: React.FC<TransactionListProps> = ({ transactions }) => {

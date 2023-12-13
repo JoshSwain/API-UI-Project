@@ -3,21 +3,21 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import TransactionPage from './pages/Transactions';
 import ItemsPage from './pages/Items';
 import HomePage from './pages/Home';
-import { AppBar, createTheme, ThemeProvider, Toolbar, Typography, Stack } from '@mui/material';
+import { AppBar, ThemeProvider, Toolbar, Typography, Stack } from '@mui/material';
+import blueTheme from './themes/blueTheme';
+// import blackAndWhiteTheme from './themes/blackAndWhiteTheme';
+// import bubbleGumTheme from './themes/bubbleGumTheme';
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#01579b'
-    }
-  }
-})
+const currentTheme = blueTheme
+// const currentTheme = blackAndWhiteTheme
+// const currentTheme = bubbleGumTheme
+
 
 //Main React app, from here all pages are routed
 const App = () => {
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={currentTheme}>
       <Router>
         <AppBar position='static'>
           <Toolbar>

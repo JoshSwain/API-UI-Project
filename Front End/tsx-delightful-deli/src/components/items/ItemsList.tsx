@@ -1,5 +1,5 @@
 import React from 'react';
-import { ItemType, ItemListProps } from '../types/item';
+import { ItemType, ItemListProps } from '../../types/item';
 import { Container, Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
 
 const ItemsList: React.FC<ItemListProps> = ({ items }) => {

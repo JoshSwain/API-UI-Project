@@ -3,7 +3,10 @@ import { GetObjectsType } from "../../types/GetObjType";
 import { GetSetterType } from "../../types/GetObjType";
 import domainRouter from "./domainRouter";
 
-const getObject = async (domain: string, objects: GetObjectsType, setter: GetSetterType) => {
+//Fetches an object of a specified domain, 'objects' is the Object State and 'setter' is the Object State Updater.
+const fetchObject = async (domain: string, objects: GetObjectsType, setter: GetSetterType) => {
+
+  //Finds the appropriate URL for the corresponding domain specified.
   const url = domainRouter(domain);
   const response = await api.get(url);
   console.log("Get request status: ", response.status)
@@ -18,4 +21,4 @@ const getObject = async (domain: string, objects: GetObjectsType, setter: GetSet
     }
 }
 
-export default getObject;
+export default fetchObject;

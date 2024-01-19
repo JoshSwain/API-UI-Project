@@ -3,7 +3,7 @@ import {
   CustomFormEvent,
 } from '../../types/events';
 import { ItemType } from '../../types/item';
-import postObject from '../api/postObject';
+import postObject from '../api/saveObject';
 import {
   Button,
   Container,
@@ -16,8 +16,8 @@ import transactionHandleFormSubmit from './transactionHandleFormSubmit';
 
 const TransactionForm: React.FC<{
   items: ItemType[],
-  getTransactionHandler: () => void,
-  getItemHandler: () => void}> = ({ items, getTransactionHandler, getItemHandler }) => {
+  fetchTransactionHandler: () => void,
+  fetchItemHandler: () => void}> = ({ items, fetchTransactionHandler, fetchItemHandler }) => {
     const [ formData, setFormData] = useState( {
         count: 0,
         direction: 'Sale',
@@ -31,6 +31,7 @@ const TransactionForm: React.FC<{
         });
     }
 
+    //Runs form data through validation and alerts if there is an issue before submitting and saving.
     const handleFormSubmit = async (event: CustomFormEvent) => {
         event.preventDefault();
         const response = transactionHandleFormSubmit(items, formData)
@@ -38,7 +39,7 @@ const TransactionForm: React.FC<{
           alert(response)
           return
         }
-        postObject('transaction', formData, getTransactionHandler, getItemHandler)
+        postObject('transaction', formData, fetchTransactionHandler, fetchItemHandler)
 
         }
 

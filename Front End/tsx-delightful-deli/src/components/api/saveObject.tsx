@@ -2,7 +2,8 @@ import api from "../../api";
 import { PostBodyType } from '../../types/PostObjType'
 import domainRouter from "./domainRouter";
 
-const postObject = async (domain: string, body: PostBodyType, handler: () => void, secondary_handler?: () => void ) => {
+//Saves an object of a specified domain to the database 
+const saveObject = async (domain: string, body: PostBodyType, handler: () => void, secondary_handler?: () => void ) => {
 
   const url = domainRouter(domain);
 
@@ -22,4 +23,4 @@ const postObject = async (domain: string, body: PostBodyType, handler: () => voi
   }
 }
 
-export default postObject;
+export default saveObject;

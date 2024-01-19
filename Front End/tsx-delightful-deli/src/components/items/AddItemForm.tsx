@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { CustomFormEvent } from '../../types/events';
 import { ItemType } from '../../types/item';
-import postObject from '../api/postObject';
+import saveObject from '../api/saveObject';
 import { Button, Container, TextField, MenuItem, Stack, InputAdornment } from '@mui/material';
 import itemHandleFormSubmit from './itemHandleFormSubmit';
 
 
-const AddItemForm: React.FC<{ getItemHandler: () => void; items: ItemType[] }> = ({ getItemHandler, items }) => {
+const AddItemForm: React.FC<{ fetchItemHandler: () => void; items: ItemType[] }> = ({ fetchItemHandler, items }) => {
 
   const [formData, setFormData] = useState({
     name: '',
@@ -21,6 +21,7 @@ const AddItemForm: React.FC<{ getItemHandler: () => void; items: ItemType[] }> =
     });
   };
 
+  //Runs form data through item creation validation logic and alerts if an error is found before submitting and saving.
   const handleFormSubmit = async (event: CustomFormEvent) => {
     event.preventDefault();
     const response = itemHandleFormSubmit(items, formData)
@@ -28,7 +29,7 @@ const AddItemForm: React.FC<{ getItemHandler: () => void; items: ItemType[] }> =
       alert(response)
       return
     }
-    postObject('item', formData, getItemHandler);
+    saveObject('item', formData, fetchItemHandler);
   };
 
   return (

@@ -1,8 +1,10 @@
 const domainRouter = (domain: string) => {
-    if (domain === 'item') {
-        return '/items/';
-    } else if (domain === 'transaction') {
-        return '/transactions/';
-    } else return ''
-}
-export default domainRouter
+    const domainRoutes: Record<string, string> = {
+        'item': '/items/',
+        'transaction': '/transactions/',
+    };
+
+    return domainRoutes[domain] || '';
+};
+
+export default domainRouter;

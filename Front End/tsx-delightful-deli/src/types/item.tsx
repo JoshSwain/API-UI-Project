@@ -1,8 +1,6 @@
 import { InventoryType } from "./inventory";
 import { TransactionType } from "./transactions";
 
-export {};
-
 export type ItemType = {
     id: number;
     name: string;
@@ -15,3 +13,8 @@ export type ItemType = {
 export type ItemListProps = {
     items: ItemType[];
   };
+
+export type ItemContextType = {
+  items: ItemType[];
+  fetchItemHandler: () => void
+}

@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { CustomFormEvent } from '../../types/events';
-import { ItemType } from '../../types/item';
+import { ItemContextType } from '../../types/item';
 import saveObject from '../api/saveObject';
 import { Button, Container, TextField, MenuItem, Stack, InputAdornment } from '@mui/material';
 import itemHandleFormSubmit from './itemHandleFormSubmit';
+import { ItemContext } from '../../context/ItemContext';
 
 
-const AddItemForm: React.FC<{ fetchItemHandler: () => void; items: ItemType[] }> = ({ fetchItemHandler, items }) => {
+const AddItemForm: React.FC<{}> = () => {
+  //Inheriting Item state and Item Fetcher from item context
+  const {items, fetchItemHandler} = React.useContext(ItemContext) as ItemContextType
 
+  //Default form data on UI
   const [formData, setFormData] = useState({
     name: '',
     price: 0,
@@ -29,6 +33,7 @@ const AddItemForm: React.FC<{ fetchItemHandler: () => void; items: ItemType[] }>
       alert(response)
       return
     }
+    //Custom save function managed in components/api/saveObject
     saveObject('item', formData, fetchItemHandler);
   };
 

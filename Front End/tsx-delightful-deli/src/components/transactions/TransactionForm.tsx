@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
-import {
-  CustomFormEvent,
-} from '../../types/events';
-import { ItemType } from '../../types/item';
-import postObject from '../api/saveObject';
-import {
-  Button,
-  Container,
-  Select,
-  MenuItem,
-  TextField,
-  Stack,
-} from '@mui/material';
+import { CustomFormEvent } from '../../types/events';
+import { ItemContextType } from '../../types/item';
+import saveObject from '../api/saveObject';
+import { Button, Container, Select, MenuItem, TextField, Stack } from '@mui/material';
 import transactionHandleFormSubmit from './transactionHandleFormSubmit';
+import { TransactionContext } from '../../context/TransactionContext';
+import { TransactionContextType } from '../../types/transactions';
+import { ItemContext } from '../../context/ItemContext';
 
-const TransactionForm: React.FC<{
-  items: ItemType[],
-  fetchTransactionHandler: () => void,
-  fetchItemHandler: () => void}> = ({ items, fetchTransactionHandler, fetchItemHandler }) => {
+const TransactionForm: React.FC<{}> = () => {
+    //Items, item fetcher, and transation fetcher inherited via the context
+    const {items, fetchItemHandler} = React.useContext(ItemContext) as ItemContextType
+    const {fetchTransactionHandler} = React.useContext(TransactionContext) as TransactionContextType
+
+    //Default form data
     const [ formData, setFormData] = useState( {
         count: 0,
         direction: 'Sale',
@@ -39,7 +35,7 @@ const TransactionForm: React.FC<{
           alert(response)
           return
         }
-        postObject('transaction', formData, fetchTransactionHandler, fetchItemHandler)
+        saveObject('transaction', formData, fetchTransactionHandler, fetchItemHandler)
 
         }
 

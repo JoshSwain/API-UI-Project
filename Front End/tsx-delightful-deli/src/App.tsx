@@ -5,6 +5,8 @@ import ItemsPage from './pages/Items';
 import HomePage from './pages/Home';
 import { AppBar, ThemeProvider, Toolbar, Typography, Stack } from '@mui/material';
 import blueTheme from './themes/blueTheme';
+import { ItemContextProvider } from './context/ItemContext';
+import { TransactionContextProvider } from './context/TransactionContext';
 // import blackAndWhiteTheme from './themes/blackAndWhiteTheme';
 // import bubbleGumTheme from './themes/bubbleGumTheme';
 
@@ -17,7 +19,11 @@ const currentTheme = blueTheme
 const App = () => {
 
   return (
+    //Wrappers that provide item and transaction context as well as the theme.
+    <ItemContextProvider>
+    <TransactionContextProvider>
     <ThemeProvider theme={currentTheme}>
+
       <Router>
         <AppBar position='static'>
           <Toolbar>
@@ -43,7 +49,8 @@ const App = () => {
         </Routes>
       </Router>
     </ThemeProvider>
-
+    </TransactionContextProvider>
+    </ItemContextProvider>
   )
 }
 export default App;

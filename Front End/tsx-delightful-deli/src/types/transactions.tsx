@@ -1,7 +1,3 @@
-import { ItemType } from "./item";
-
-export {};
-
 export type TransactionType = {
     id: number;
     item_id: number;
@@ -11,5 +7,9 @@ export type TransactionType = {
 
 export type TransactionListProps = {
     transactions: TransactionType[];
-    // items: ItemType[];
 };
+
+export type TransactionContextType = {
+    transactions: TransactionType[],
+    fetchTransactionHandler: () => void
+}

@@ -1,7 +1,8 @@
+#test_items_routers.py
 import pytest
 import requests
 from app.config import FASTAPI_URL
-from unit_testing.test_transactions_routers import get_tester
+from .test_tools.crud_tester import get_tester, post_tester, put_tester, delete_tester
 
 obj_path = "/items/"
 item_url = f"{FASTAPI_URL}{obj_path}"
@@ -18,17 +19,13 @@ test_item_update = {
   "price": 12.0,
   "category": None
 }
+#Creates an item, updates the item, then deletes the item, validating along the way.
+def test_item_cycle():
 
+    #Create test item
+    test_post_item = post_tester(item_url, test_item)
 
-
-#Unit Test For Item, creates an item, then cycles through CRUD operations before deleting
-@pytest.fixture
-def test_post_item():
-    return requests.post(item_url, json=test_item)
-
-def test_post(test_post_item):
-    assert test_post_item.status_code == 201
-
+    #Tests that created item details match the request we sent
     body = test_post_item.json()[1]
     assert body["name"] == test_item["name"]
     assert body["category"] == test_item["category"]
@@ -36,22 +33,20 @@ def test_post(test_post_item):
 
     id = body["id"]
 
-    # def get_tester(url):
-    #     test_obj = requests.get(url)
-    #     print(url, test_obj.status_code)
-    #     assert test_obj.status_code == 200
-
+    #Verifying item was added to database
     get_tester(f"{item_url}{id}")
 
+    #Verifies all items can be fetched
     get_tester(f"{item_url}")
 
+    #Verifying inventory can be fetched
     get_tester(f"{inventory_url}{id}")
 
-    test_update_obj = requests.put(f"{item_url}{id}", json=test_item_update)
-    assert test_update_obj.status_code == 200
+    #Update the object and verify the change in price
+    test_update_obj = put_tester(f"{item_url}{id}", test_item_update)
     assert test_update_obj.json()[1]["price"] == 12.0
 
-    test_delete_obj = requests.delete(f"{item_url}{id}")
-    assert test_delete_obj.status_code == 200
+    #Delete item
+    delete_tester(f"{item_url}{id}")
 
 

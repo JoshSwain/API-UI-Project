@@ -35,6 +35,7 @@ const TransactionForm: React.FC<{}> = () => {
           alert(response)
           return
         }
+        //Custom save function managed in components/api/saveObject
         saveObject('transaction', formData, fetchTransactionHandler, fetchItemHandler)
 
         }
